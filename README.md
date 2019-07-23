@@ -1,1 +1,1 @@
-# ymn.github.io
+# https://2504115064.github.io/ymn.github.io/ 访问地址 后面跟文件名
