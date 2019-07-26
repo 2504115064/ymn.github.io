@@ -38,6 +38,8 @@
 </head>
 
 <body>
+	<audio id="audio" controls="controls" autoplay="autoplay" src="./assets/audio/Quietly2019_07_26.mp3"></audio>
+	<!-- <audio id="audio" controls="controls" autoplay="autoplay" src="./assets/audio/balloon2019_0726.mp3"></audio> -->
 	<div id="container">
 		<div id="output">
 			<div id="divTyping" style="position: fixed;top:50px;color: #ffffff"></div>
@@ -64,6 +66,22 @@
 		}
 	}
 	typing();
+</script>
+<script>
+	$(function () {
+		let audioArr = ['./assets/audio/balloon2019_0726.mp3']
+		var audio = document.getElementById("audio");
+		if (audio.paused) { //判读是否播放  
+			audio.paused = false;
+			audio.play(); //没有就播放 
+		}
+		audio.loop = false;
+		audio.addEventListener('ended', function () {
+			audio.setAttribute('src',audioArr[0])
+			console.log('歌曲播放结束触发');
+		}, false);
+	})
+
 </script>
 
 </html>

@@ -33,7 +33,12 @@ body{overflow:auto;color:#4f5f6f;line-height:1.65;font-size:14px;}
     visibility: hidden;
 }
 
-
+#audio{
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
 
 #container {
 	position: absolute;
