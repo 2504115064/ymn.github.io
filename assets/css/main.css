@@ -4,10 +4,6 @@ html {
     touch-action: pan-y!important;
     
 }
-@font-face {
-    font-family: HappyZcool;
-    src: url('/assets/font/happyzcool.ttf')
-}
 * { touch-action: pan-y!important;} 
 body,
 div,
@@ -38,7 +34,7 @@ body {
 	width: 100%;
     *cursor: default;
 	overflow: hidden;
-	font: 16px/1.5 "Microsoft YaHei",Helvetica,STHeiti STXihei,Microsoft JhengHei,Arial;
+	font: 16px/1.5 "Microsoft YaHei",Helvetica,Arial;
 }
 #pageContain {
 	overflow: hidden;
@@ -80,6 +76,10 @@ body {
 .section1 {
     background: #fce3e3;
     box-shadow: 1px 1px 4px 0 #f7a0a0;
+}
+.section2 {
+    background: #52c1f3;
+    box-shadow: 1px 1px 4px 0 #20b6fa;
 }
 .section3 {
     background: #f3efe9;
