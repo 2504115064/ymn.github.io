@@ -6,7 +6,7 @@ html {
 }
 @font-face {
     font-family: HappyZcool;
-    src: url('./assets/font/happyzcool.ttf')
+    src: url('/assets/font/happyzcool.ttf')
 }
 * { touch-action: pan-y!important;} 
 body,
