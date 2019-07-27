@@ -102,7 +102,7 @@ function Rise() {
     let timer2 = null,
         distance = 0;
     /* 升高时，移动的距离*/
-    const target = 180, /* 目标距离*/
+    const target = 350, /* 目标距离*/
         speed = 1;
     /*移动速度*/
 
