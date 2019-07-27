@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -11,77 +11,849 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 	<meta name="renderer" content="webkit">
 	<link rel="shortcut icon" href="./assets/img/Love.png">
+	<link rel="stylesheet" type="text/css" href="./assets/css/main.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/index.css">
 	<script src="./assets/js/viewport.js"></script>
-	<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-	<script src="./assets/js/vector.js"></script>
-	<script>
-		$(function () {
-
-			// 初始化 传入dom id
-			var victor = new Victor("container", "output");
-			var theme = [
-				["#002c4a", "#005584"],
-				["#35ac03", "#3f4303"],
-				["#ac0908", "#cd5726"],
-				["#18bbff", "#00486b"]
-			]
-			$(".color li").each(function (index, val) {
-				var color = theme[index];
-				$(this).mouseover(function () {
-					victor(color).set();
-				})
-			});
-
-		});
-	</script>
+	<!-- <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script> -->
+	<script type="text/javascript" src="./assets/js/fullPage.min.js"></script>
 </head>
+<!--[if lte IE 7]>      
+<body scroll="no"> 
+<![endif]-->
+<!--[if gt IE 7]><!-->
+<!-- 第一屏样式 -->
+<style>
+	.icon-love {
+		width: 16rem;
+	}
 
-<body>
-	<audio id="audio" controls="controls" autoplay="autoplay" src="./assets/audio/Quietly2019_07_26.mp3"></audio>
-	<!-- <audio id="audio" controls="controls" autoplay="autoplay" src="./assets/audio/balloon2019_0726.mp3"></audio> -->
-	<div id="container">
-		<div id="output">
-			<div id="divTyping" style="position: fixed;top:50px;color: #ffffff"></div>
-		</div>
-	</div>
-	<ul class="color">
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-	</ul>
-</body>
-<script type="text/javascript">
-	var str = '青梅竹马不是你，情窦初开不是你<br />，只愿细水长流是你，柴米油盐是你，白首也是你。就让我笨拙的喜欢，从须臾到不朽，从一叶到知秋，然后骑一匹白马，到人海里安家。于千万人之中，遇见你所遇见的人；于千万年之中，时间的无涯荒野里，没有早一步，也没有晚一步，刚巧赶上了。我说不出来为什么喜欢你，但我知道，你就是我不爱别人的理由。';
-	var i = 0;
-	function typing() {
-		var divTyping = document.getElementById('divTyping');
-		if (i <= str.length) {
-			divTyping.innerHTML = str.slice(0, i++) + '_';
-			setTimeout('typing()', 200);//递归调用
+	.container {
+		width: 100%;
+		height: 100%;
+		position: relative;
+	}
+
+	/*---------------------- body_left -------------------------*/
+	.body_left {
+		width: 8rem;
+		height: 8rem;
+		left: 0;
+		bottom: 0.5rem;
+		position: absolute;
+		z-index: 98;
+	}
+	.body_left img{
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+	/*---------------------- body_left -------------------------*/
+
+	/*---------------------- body_center -------------------------*/
+	.container .love {
+		width: 21.8rem;
+		/* 13 * 40 */
+		height: 15.6rem;
+		/* 11 * 40 */
+		left: 40%;
+		top: 60%;
+		position: absolute;
+		margin: -10.4rem 0 0 -8.8rem;
+		/*background-color: gray;
+ */
+	}
+
+	.love .block {
+		right: 0;
+		position: absolute;
+		visibility: hidden;
+		/*未开始升空动画前隐藏*/
+		background-color: yellow;
+	}
+
+	.love .block div {
+		width: 1rem;
+		height: 1rem;
+		position: absolute;
+		background: url("./assets/img/heart.png") no-repeat;
+		background-size: 1.1rem 1rem;
+		box-sizing: border-box;
+		z-index: 999;
+	}
+
+	/*---------------------- body_center -------------------------*/
+</style>
+<!-- 第三屏样式 -->
+<style>
+	@font-face {
+		font-family: HappyZcool;
+		src: url('./assets/font/happyzcool.ttf')
+	}
+
+	.love_page {
+		width: 100vw;
+		height: 100vh;
+		position: relative;
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+		overflow: hidden;
+		background: #f3efe9;
+	}
+
+	.love_audio_play {
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		top: 17px;
+		right: 17px;
+		text-align: center;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: contain;
+		background-image: url('./assets/img/9213b07eca806538df3601ba92dda144ac3482bf.png');
+		display: block;
+	}
+
+	.animated {
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+		-webkit-animation-fill-mode: both;
+		animation-fill-mode: both;
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+		-webkit-perspective: 1000;
+		perspective: 1000;
+	}
+
+	.exClockwise {
+		-webkit-animation-name: exClockwise;
+		animation-name: exClockwise;
+		-webkit-animation-timing-function: linear;
+		animation-timing-function: linear;
+	}
+
+	@-webkit-keyframes exClockwise {
+		from {
+			-webkit-transform: rotate(0);
+			transform: rotate(0)
 		}
-		else {
-			divTyping.innerHTML = str;//结束打字,移除 _ 光标
+
+		to {
+			-webkit-transform: rotate(360deg);
+			transform: rotate(360deg)
 		}
 	}
-	typing();
-</script>
-<script>
-	$(function () {
-		let audioArr = ['./assets/audio/balloon2019_0726.mp3']
-		var audio = document.getElementById("audio");
-		if (audio.paused) { //判读是否播放  
-			audio.paused = false;
-			audio.play(); //没有就播放 
-		}
-		audio.loop = false;
-		audio.addEventListener('ended', function () {
-			audio.setAttribute('src',audioArr[0])
-			console.log('歌曲播放结束触发');
-		}, false);
-	})
 
-</script>
+	@keyframes exClockwise {
+		from {
+			-webkit-transform: rotate(0);
+			transform: rotate(0)
+		}
+
+		to {
+			-webkit-transform: rotate(360deg);
+			transform: rotate(360deg)
+		}
+	}
+
+	.love_trailer {
+		z-index: 1;
+		position: absolute;
+		width: 400px;
+		height: 400px;
+		top: 50%;
+		left: 50%;
+
+		transform: translate(-50%, -50%);
+	}
+
+	.love_surface {
+		overflow: hidden;
+		box-sizing: content-box;
+		position: absolute;
+		z-index: 1;
+		width: 400px;
+		height: 400px;
+		animation-duration: 5s;
+		animation-delay: 0.1s;
+		animation-iteration-count: infinite;
+		animation-direction: normal;
+	}
+
+	.love_component_img {
+		width: 400px;
+		height: 400px;
+		border-style: solid;
+		border-radius: 0px;
+		border-color: black;
+		border-width: 0px;
+		background-repeat: no-repeat;
+		background-position: center center;
+		box-sizing: border-box;
+		vertical-align: top;
+	}
+
+	.love_trailer_exBounce {
+		position: absolute;
+		z-index: 1;
+		width: 361px;
+		height: 289px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+
+	}
+
+	@-webkit-keyframes exBounce {
+		0% {
+			-webkit-transform: scale(0, 0);
+			transform: scale(0, 0)
+		}
+
+		3.333333% {
+			-webkit-transform: scale(.64545, .686015);
+			transform: scale(.64545, .686015)
+		}
+
+		6.666667% {
+			-webkit-transform: scale(.798425, .90691);
+			transform: scale(.798425, .90691)
+		}
+
+		10% {
+			-webkit-transform: scale(.92774, 1.07226);
+			transform: scale(.92774, 1.07226)
+		}
+
+		13.333333% {
+			-webkit-transform: scale(1.01897, 1.14684);
+			transform: scale(1.01897, 1.14684)
+		}
+
+		16.666667% {
+			-webkit-transform: scale(1.07044, 1.140885);
+			transform: scale(1.07044, 1.140885)
+		}
+
+		20% {
+			-webkit-transform: scale(1.08847, 1.08847);
+			transform: scale(1.08847, 1.08847)
+		}
+
+		23.333333% {
+			-webkit-transform: scale(1.08303, 1.02623);
+			transform: scale(1.08303, 1.02623)
+		}
+
+		26.666667% {
+			-webkit-transform: scale(1.064445, .97964);
+			transform: scale(1.064445, .97964)
+		}
+
+		30% {
+			-webkit-transform: scale(1.041375, .958625);
+			transform: scale(1.041375, .958625)
+		}
+
+		33.333333% {
+			-webkit-transform: scale(1.01985, .960305);
+			transform: scale(1.01985, .960305)
+		}
+
+		36.666667% {
+			-webkit-transform: scale(1.00322, .97507);
+			transform: scale(1.00322, .97507)
+		}
+
+		40% {
+			-webkit-transform: scale(.99261, .99261);
+			transform: scale(.99261, .99261)
+		}
+
+		43.333333% {
+			-webkit-transform: scale(.98758, 1.005735);
+			transform: scale(.98758, 1.005735)
+		}
+
+		46.666667% {
+			-webkit-transform: scale(.986835, 1.01166);
+			transform: scale(.986835, 1.01166)
+		}
+
+		50% {
+			-webkit-transform: scale(.988815, 1.011185);
+			transform: scale(.988815, 1.011185)
+		}
+
+		53.333333% {
+			-webkit-transform: scale(.99207, 1.007025);
+			transform: scale(.99207, 1.007025)
+		}
+
+		56.666667% {
+			-webkit-transform: scale(.99549, 1.002085);
+			transform: scale(.99549, 1.002085)
+		}
+
+		60% {
+			-webkit-transform: scale(.998385, .998385);
+			transform: scale(.998385, .998385)
+		}
+
+		63.333333% {
+			-webkit-transform: scale(1.000425, .996715);
+			transform: scale(1.000425, .996715)
+		}
+
+		66.666667% {
+			-webkit-transform: scale(1.001575, .99685);
+			transform: scale(1.001575, .99685)
+		}
+
+		70% {
+			-webkit-transform: scale(1.00198, .99802);
+			transform: scale(1.00198, .99802)
+		}
+
+		73.333333% {
+			-webkit-transform: scale(1.001855, .999415);
+			transform: scale(1.001855, .999415)
+		}
+
+		76.666667% {
+			-webkit-transform: scale(1.00144, 1.000455);
+			transform: scale(1.00144, 1.000455)
+		}
+
+		80% {
+			-webkit-transform: scale(1.000925, 1.000925);
+			transform: scale(1.000925, 1.000925)
+		}
+
+		83.333333% {
+			-webkit-transform: scale(1.000445, 1.00089);
+			transform: scale(1.000445, 1.00089)
+		}
+
+		86.666667% {
+			-webkit-transform: scale(1.00007, 1.00056);
+			transform: scale(1.00007, 1.00056)
+		}
+
+		90% {
+			-webkit-transform: scale(.999835, 1.000165);
+			transform: scale(.999835, 1.000165)
+		}
+
+		93.333333% {
+			-webkit-transform: scale(.99972, .99987);
+			transform: scale(.99972, .99987)
+		}
+
+		96.666667% {
+			-webkit-transform: scale(.999705, .99974);
+			transform: scale(.999705, .99974)
+		}
+
+		100% {
+			-webkit-transform: scale(1, 1);
+			transform: scale(1, 1)
+		}
+	}
+
+	@keyframes exBounce {
+		0% {
+			-webkit-transform: scale(0, 0);
+			transform: scale(0, 0)
+		}
+
+		3.333333% {
+			-webkit-transform: scale(.64545, .686015);
+			transform: scale(.64545, .686015)
+		}
+
+		6.666667% {
+			-webkit-transform: scale(.798425, .90691);
+			transform: scale(.798425, .90691)
+		}
+
+		10% {
+			-webkit-transform: scale(.92774, 1.07226);
+			transform: scale(.92774, 1.07226)
+		}
+
+		13.333333% {
+			-webkit-transform: scale(1.01897, 1.14684);
+			transform: scale(1.01897, 1.14684)
+		}
+
+		16.666667% {
+			-webkit-transform: scale(1.07044, 1.140885);
+			transform: scale(1.07044, 1.140885)
+		}
+
+		20% {
+			-webkit-transform: scale(1.08847, 1.08847);
+			transform: scale(1.08847, 1.08847)
+		}
+
+		23.333333% {
+			-webkit-transform: scale(1.08303, 1.02623);
+			transform: scale(1.08303, 1.02623)
+		}
+
+		26.666667% {
+			-webkit-transform: scale(1.064445, .97964);
+			transform: scale(1.064445, .97964)
+		}
+
+		30% {
+			-webkit-transform: scale(1.041375, .958625);
+			transform: scale(1.041375, .958625)
+		}
+
+		33.333333% {
+			-webkit-transform: scale(1.01985, .960305);
+			transform: scale(1.01985, .960305)
+		}
+
+		36.666667% {
+			-webkit-transform: scale(1.00322, .97507);
+			transform: scale(1.00322, .97507)
+		}
+
+		40% {
+			-webkit-transform: scale(.99261, .99261);
+			transform: scale(.99261, .99261)
+		}
+
+		43.333333% {
+			-webkit-transform: scale(.98758, 1.005735);
+			transform: scale(.98758, 1.005735)
+		}
+
+		46.666667% {
+			-webkit-transform: scale(.986835, 1.01166);
+			transform: scale(.986835, 1.01166)
+		}
+
+		50% {
+			-webkit-transform: scale(.988815, 1.011185);
+			transform: scale(.988815, 1.011185)
+		}
+
+		53.333333% {
+			-webkit-transform: scale(.99207, 1.007025);
+			transform: scale(.99207, 1.007025)
+		}
+
+		56.666667% {
+			-webkit-transform: scale(.99549, 1.002085);
+			transform: scale(.99549, 1.002085)
+		}
+
+		60% {
+			-webkit-transform: scale(.998385, .998385);
+			transform: scale(.998385, .998385)
+		}
+
+		63.333333% {
+			-webkit-transform: scale(1.000425, .996715);
+			transform: scale(1.000425, .996715)
+		}
+
+		66.666667% {
+			-webkit-transform: scale(1.001575, .99685);
+			transform: scale(1.001575, .99685)
+		}
+
+		70% {
+			-webkit-transform: scale(1.00198, .99802);
+			transform: scale(1.00198, .99802)
+		}
+
+		73.333333% {
+			-webkit-transform: scale(1.001855, .999415);
+			transform: scale(1.001855, .999415)
+		}
+
+		76.666667% {
+			-webkit-transform: scale(1.00144, 1.000455);
+			transform: scale(1.00144, 1.000455)
+		}
+
+		80% {
+			-webkit-transform: scale(1.000925, 1.000925);
+			transform: scale(1.000925, 1.000925)
+		}
+
+		83.333333% {
+			-webkit-transform: scale(1.000445, 1.00089);
+			transform: scale(1.000445, 1.00089)
+		}
+
+		86.666667% {
+			-webkit-transform: scale(1.00007, 1.00056);
+			transform: scale(1.00007, 1.00056)
+		}
+
+		90% {
+			-webkit-transform: scale(.999835, 1.000165);
+			transform: scale(.999835, 1.000165)
+		}
+
+		93.333333% {
+			-webkit-transform: scale(.99972, .99987);
+			transform: scale(.99972, .99987)
+		}
+
+		96.666667% {
+			-webkit-transform: scale(.999705, .99974);
+			transform: scale(.999705, .99974)
+		}
+
+		100% {
+			-webkit-transform: scale(1, 1);
+			transform: scale(1, 1)
+		}
+	}
+
+	.exBounce {
+		-webkit-animation-name: exBounce;
+		animation-name: exBounce;
+	}
+
+	.love_surface_image {
+		width: 361px;
+		height: 289px;
+		z-index: 1;
+		overflow: hidden;
+		box-sizing: content-box;
+		animation-duration: 2s;
+		animation-delay: 0.1s;
+		animation-iteration-count: 1;
+		animation-direction: normal;
+	}
+
+	.love_component_image {
+		width: 361px;
+		height: 289px;
+		border-style: solid;
+		border-radius: 0px;
+		border-color: black;
+		border-width: 0px;
+		background-repeat: no-repeat;
+		background-position: center center;
+		box-sizing: border-box;
+		vertical-align: top;
+	}
+
+	.love_trailer_container {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	@-webkit-keyframes swing {
+		20% {
+			-webkit-transform: rotate3d(0, 0, 1, 15deg);
+			transform: rotate3d(0, 0, 1, 15deg)
+		}
+
+		40% {
+			-webkit-transform: rotate3d(0, 0, 1, -10deg);
+			transform: rotate3d(0, 0, 1, -10deg)
+		}
+
+		60% {
+			-webkit-transform: rotate3d(0, 0, 1, 5deg);
+			transform: rotate3d(0, 0, 1, 5deg)
+		}
+
+		80% {
+			-webkit-transform: rotate3d(0, 0, 1, -5deg);
+			transform: rotate3d(0, 0, 1, -5deg)
+		}
+
+		100% {
+			-webkit-transform: rotate3d(0, 0, 1, 0deg);
+			transform: rotate3d(0, 0, 1, 0deg)
+		}
+	}
+
+	@keyframes swing {
+		20% {
+			-webkit-transform: rotate3d(0, 0, 1, 15deg);
+			transform: rotate3d(0, 0, 1, 15deg)
+		}
+
+		40% {
+			-webkit-transform: rotate3d(0, 0, 1, -10deg);
+			transform: rotate3d(0, 0, 1, -10deg)
+		}
+
+		60% {
+			-webkit-transform: rotate3d(0, 0, 1, 5deg);
+			transform: rotate3d(0, 0, 1, 5deg)
+		}
+
+		80% {
+			-webkit-transform: rotate3d(0, 0, 1, -5deg);
+			transform: rotate3d(0, 0, 1, -5deg)
+		}
+
+		100% {
+			-webkit-transform: rotate3d(0, 0, 1, 0deg);
+			transform: rotate3d(0, 0, 1, 0deg)
+		}
+	}
+
+	.love_trailer_animated {
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+		-webkit-animation-fill-mode: both;
+		animation-fill-mode: both;
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+		-webkit-perspective: 1000;
+		perspective: 1000;
+	}
+
+	.swing {
+		-webkit-transform-origin: top center;
+		-ms-transform-origin: top center;
+		transform-origin: top center;
+		-webkit-animation-name: swing;
+		animation-name: swing;
+	}
+
+	.love_trailer_swing {
+		position: absolute;
+		z-index: 1;
+		right: -10px;
+		width: 217px;
+		height: 76px;
+		bottom: 35px;
+		animation-duration: 1s;
+		animation-delay: 1.1s;
+		animation-iteration-count: 1;
+		animation-direction: normal;
+	}
+
+	.love_surface_label {
+		width: 217px;
+		height: 76px;
+		transform: rotate(7deg);
+	}
+
+	.love_component_label {
+		display: table-cell;
+		vertical-align: top;
+		text-shadow: none;
+		width: 217px;
+		height: 76px;
+	}
+
+	.love_component_label p {
+		text-align: center;
+	}
+
+	.love_component_label p span {
+		font-size: 18px;
+		font-family: HappyZcool;
+		color: rgb(106, 53, 0);
+	}
+
+	.love_trailer_fadeIn {
+		position: absolute;
+		left: 60px;
+		width: 276px;
+		height: 45px;
+		top: 55px;
+		animation-duration: 1s;
+		animation-delay: 0.1s;
+		animation-iteration-count: 1;
+		animation-direction: normal;
+	}
+
+	.love_surface_label_lg {
+		width: 276px;
+		transform: rotate(8deg);
+	}
+
+	.love_component_label_lg {
+		display: table-cell;
+		vertical-align: top;
+		text-shadow: none;
+		width: 276px;
+		line-height: 36px;
+	}
+
+	.love_component_label_lg p {
+		text-align: left;
+	}
+
+	.love_component_label_lg p span {
+		font-family: HappyZcool;
+		font-size: 32px;
+		color: rgb(106, 53, 0);
+	}
+</style>
+
+<body>
+	<!--<![endif]-->
+	<div class="love_audio_play haha1" onclick="lovePlay(this)"></div>
+	<div id="article">
+		<div class="page section1 current">
+			<div class="container" onselectstart="return false;" unselectable="on" style="-moz-user-select:none;">
+				<div class="body_left">
+					<img src="./assets/img/biubiubiu.gif" alt="" ondragstart='return false;'>
+				</div>
+				<div class="body_center love" id="parent">
+					<div class="block">
+						<div class="div1"></div>
+						<div class="div2"></div>
+						<div class="div3"></div>
+						<div class="div4"></div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<div class="page section3">
+			<div class="contain">
+				<h3 class="title">这里是第二竖屏</h3>
+				<h4 class="titleEng">This is section2</h4>
+			</div>
+		</div>
+
+		<div class="page section4">
+			<div class="love_page">
+				<div class="love_trailer">
+					<div class="love_surface exClockwise animated">
+						<img class="love_component_img" src="./assets/img/55e736d12f2eb9382bd385e2dc628535e5dd6f60.png">
+					</div>
+				</div>
+				<div class="love_trailer_exBounce">
+					<div class="love_surface_image exBounce animated">
+						<img class="love_component_image" src="./assets/img/d6fad5.png">
+					</div>
+				</div>
+				<div class="love_trailer_exBounce">
+					<div class="love_trailer_container">
+						<div class="love_trailer_swing swing animated">
+							<div class="love_surface_label">
+								<div class="love_component_label">
+									<p>
+										<span>致我最爱的人</span>
+									</p>
+									<p>
+										<span>&nbsp; 杨梦妮</span>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="love_trailer_fadeIn">
+							<div class="love_surface_label_lg">
+								<div class="love_component_label_lg">
+									<p>
+										<span>时光不老,我们不散</span>
+									</p>
+									<p>
+										<span>繁华落幕，我陪你落日流年</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<audio id="audio" controls="controls" onplay="this.currentTime=15" autoplay="autoplay"
+		src="./assets/audio/Quietly2019_07_26.mp3"></audio>
+	<script src="./assets/js/utils/love.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		pageOneAnimated()
+		var runPage,
+			runPage2,
+			interval,
+			autoPlay;
+		runSection = new FullPage({
+			id: 'article',                            // id of contain
+			slideTime: 800,                               // time of slide
+			effect: {                                     // slide effect
+				transform: {
+					translate: 'Y',					   // 'X'|'Y'|'XY'|'none'
+					scale: [0, 1],					   // [scalefrom, scaleto]
+					rotate: [0, 0]					   // [rotatefrom, rotateto]
+				},
+				opacity: [0, 1]                           // [opacityfrom, opacityto]
+			},
+			mode: 'touch,wheel',               // mode of fullpage
+			easing: [0, .93, .39, .98],
+			callback: function (index, thisPage) {     // callback when pageChange
+				console.log(index)
+				if (index == 0) {
+					pageOneAnimated()
+				} else {
+					document.getElementById("parent").innerHTML = '';
+					let Html = `<div class="block">
+                    <div class="div1"></div>
+                    <div class="div2"></div>
+                    <div class="div3"></div>
+                    <div class="div4"></div>
+                </div>`
+					document.getElementById("parent").innerHTML = Html
+				}
+			}
+		});
+	</script>
+	<script type="text/javascript">
+		/**
+		 * 控制音乐播放
+		*/
+		window.onload = function () {
+			let audio = document.getElementById("audio");
+			let audioArr = ['./assets/audio/balloon2019_0726.mp3']
+			if (audio.paused) { //判读是否播放  
+				audio.paused = false;
+				audio.play(); //没有就播放 
+			}
+			audio.loop = false;
+			audio.addEventListener('ended', function () {
+				audio.setAttribute('src', audioArr[0])
+				console.log('歌曲播放结束触发');
+			}, false);
+		}
+		let audioType = true; //
+		function lovePlay(obj) {
+			let audio = document.getElementById('audio');
+			let love_play = document.getElementsByClassName("love_audio_play")[0];
+			if (audio !== null) {
+				//检测播放是否已暂停.audio.paused 在播放器播放时返回false.
+				if (audio.paused) {
+					obj.style.setProperty('animation-play-state', 'running');
+					obj.style.setProperty('-webkit-animation-play-state', 'running');
+					audio.play();//audio.play();// 这个就是播放  
+				} else {
+					obj.style.setProperty('animation-play-state', 'paused');
+					obj.style.setProperty('-webkit-animation-play-state', 'paused');
+					audio.pause();// 这个就是暂停
+				}
+			}
+		}
+	</script>
+
+	<!--[if lte IE 6]>
+	<script type="text/javascript" src="http://mat1.gtimg.com/cd/201108/app/DD_belatedPNG_0.0.8a.js" charset="utf-8"></script>
+	<script type="text/javascript">
+	DD_belatedPNG.fix("*");
+	</script>
+	<![endif]-->
+
+</body>
 
 </html>
