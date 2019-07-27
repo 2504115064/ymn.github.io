@@ -77,13 +77,13 @@ function Next() {
     block.style.visibility = "visible"; //升空动画前允许可见
 
     //2.移动方块到指定的位置-即是移动【自身中心】到目标位置
-    block.style.left = block_left + 30 * offset_pitn["block" + index][0] + "px";
-    block.style.top = block_top - 30 * offset_pitn["block" + index][1] + "px";
+    block.style.left = block_left + 28 * offset_pitn["block" + index][0] + "px";
+    block.style.top = block_top - 28 * offset_pitn["block" + index][1] + "px";
     for (let i = 0; i < block.children.length; i++) {
         // block.children[1].innerText = index;    //编号便于调试
-        block.children[i].style.left = blk_pitn["block" + index][i][0] * -30 + "px";
+        block.children[i].style.left = blk_pitn["block" + index][i][0] * -28 + "px";
         /* -40 是因为逻辑坐标和浏览器的x，y轴方向不一样*/
-        block.children[i].style.top = blk_pitn["block" + index][i][1] * -30 + "px";
+        block.children[i].style.top = blk_pitn["block" + index][i][1] * -28 + "px";
     }
 
     //3.克隆方块—保存现在的位置
@@ -102,7 +102,7 @@ function Rise() {
     let timer2 = null,
         distance = 0;
     /* 升高时，移动的距离*/
-    const target = 350, /* 目标距离*/
+    const target = 90, /* 目标距离*/
         speed = 1;
     /*移动速度*/
 
@@ -126,6 +126,7 @@ function Rise() {
 }
 function pageOneAnimated() {
     index = 0;
+    document.getElementById("body_left").innerHTML=`<img src="./assets/img/biubiubiu.gif?timestamp=${new Date().getTime()}" alt="" ondragstart='return false;'>`
     setTimeout(() => {
         timer = setInterval(() => {
             Next();
