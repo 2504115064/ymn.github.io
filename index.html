@@ -117,8 +117,7 @@
 			</div>
 		</div>
 	</div>
-	<audio id="audio" controls="controls" onplay="this.currentTime=15" autoplay="autoplay"
-		src="https://ip-h5-nf01-sycdn.kuwo.cn/b25cfcf5d977a17e661359d09ffd12f6/5d3c8d2a/resource/n1/35/53/263591995.mp3"></audio>
+	<audio id="audio" controls="controls" onplay="this.currentTime=15" autoplay="autoplay" src=""></audio>
 	<script src="./assets/js/utils/love.js" type="text/javascript"></script>
 	<script type="text/javascript">
 
@@ -163,20 +162,74 @@
 		/**
 		 * 控制音乐播放
 		*/
+		let audioArr = 1
+		let audioUrlArr = ['http://fs.mv.web.kugou.com/201907291200/47b5d1ab3250e87fdaa42fbd0ae21498/G069/M00/05/1B/5YYBAFgSrr2ACLPWAdJlj2I-mZ8864.mp4']
+
 		window.onload = function () {
+			getAudioListOne('静悄悄')
+			var audio = document.getElementById('audio');
+			var state = 0;
+			document.addEventListener('touchstart', function(){
+				if(state==0){
+					audio.play();
+					state=1;
+				}
+			}, false);
+
+			document.addEventListener("WeixinJSBridgeReady", function () {
+				audio.play();
+			}, false);
+		}
+		function play_url(url) {
+			audioUrlArr.push(url)
+			console.log(audioUrlArr)
 			let audio = document.getElementById("audio");
-			let audioArr = ['http://other.web.ri03.sycdn.kuwo.cn/1783eec3ed5b149092e4f5a0095e5e5a/5d3c8f50/resource/m1/79/90/3248076350.mp4']
+			audio.setAttribute('src', url)
 			if (audio.paused) { //判读是否播放  
 				audio.paused = false;
 				audio.play(); //没有就播放 
 			}
 			audio.loop = false;
 			audio.addEventListener('ended', function () {
-				audio.setAttribute('src', audioArr[0])
+				if(audioArr == 0){
+					audioArr = 1
+				}else{
+					audioArr = 0
+				}
+				audio.setAttribute('src', audioUrlArr[audioArr])
 				console.log('歌曲播放结束触发');
 			}, false);
 		}
-		let audioType = true; //
+		/*
+        *跨域获取音乐列表
+        */
+		function getAudioListOne(keyword) {
+			var script = document.createElement('script');
+			script.src = `http://songsearch.kugou.com/song_search_v2?callback=getAudioInfoOne&keyword=${keyword}&page=1&pagesize=30&userid=-1&clientver=&platform=WebFilter&tag=em&filter=2&iscorrection=1&privilege_filter=0&_=1489023388641`;
+			document.body.appendChild(script);
+		}
+		/**
+         * 跨域获取音乐详情
+        */
+		function getAudioInfoOne(res) {
+			let hash = res.data.lists[0].FileHash,
+				album_id = res.data.lists[0].AlbumID
+			var script = document.createElement('script');
+			script.src = `http://www.kugou.com/yy/index.php?callback=getAudioUrlOne&r=play/getdata&hash=${hash}&=${album_id}`;
+			document.body.appendChild(script);
+		}
+        /**
+         * 获取音乐文件路径
+        */
+		function getAudioUrlOne(data) {
+			if (data) {
+				play_url(data.data.play_url)
+			}
+		}
+		/**
+		 * 控制播放
+		*/
+		let currentTime = 0;
 		function lovePlay(obj) {
 			let audio = document.getElementById('audio');
 			let love_play = document.getElementsByClassName("love_audio_play")[0];
@@ -185,16 +238,21 @@
 				if (audio.paused) {
 					obj.style.setProperty('animation-play-state', 'running');
 					obj.style.setProperty('-webkit-animation-play-state', 'running');
-					audio.play();//audio.play();// 这个就是播放  
+					audio.currentTime = currentTime
+					console.log(audio.currentTime)
+					audio.play(currentTime);//audio.play();// 这个就是播放  
 				} else {
 					obj.style.setProperty('animation-play-state', 'paused');
 					obj.style.setProperty('-webkit-animation-play-state', 'paused');
+					currentTime = audio.currentTime;
 					audio.pause();// 这个就是暂停
 				}
 			}
 		}
 	</script>
+	<script>
 
+	</script>
 	<!--[if lte IE 6]>
 	<script type="text/javascript" src="http://mat1.gtimg.com/cd/201108/app/DD_belatedPNG_0.0.8a.js" charset="utf-8"></script>
 	<script type="text/javascript">

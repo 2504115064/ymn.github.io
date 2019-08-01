@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html class="multi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="title" content="感谢让我遇见你">
+    <title></title>
+    <meta name="description" content="网站SEO描述">
+    <meta name="keywords" content="SEO收搜关键词">
+    <meta name="baidu-site-verification" content="qKSX5MEr35">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="renderer" content="webkit">
+    <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+</head>
+
+<body>
+    <script>
+        /*
+        *获取音乐列表
+        */
+        function getAudioListOne() {
+            const keyword = "静悄悄";
+            var script = document.createElement('script');
+            script.src = `http://songsearch.kugou.com/song_search_v2?callback=getAudioInfoOne&keyword=${keyword}&page=1&pagesize=30&userid=-1&clientver=&platform=WebFilter&tag=em&filter=2&iscorrection=1&privilege_filter=0&_=1489023388641`;
+            document.body.appendChild(script);
+        }
+        /**
+         * 获取音乐详情
+        */
+        function getAudioInfoOne(res) {
+            let hash = res.data.lists[0].FileHash,
+                album_id = res.data.lists[0].AlbumID
+            var script = document.createElement('script');
+            script.src = `http://www.kugou.com/yy/index.php?callback=getAudioUrlOne&r=play/getdata&hash=${hash}&=${album_id}`;
+            document.body.appendChild(script);
+        }
+        /**
+         * 获取音乐文件路径
+        */
+        function getAudioUrlOne(data) {
+            if (data) {
+                play_url(data.data.play_url)
+            }
+        }
+        function play_url(url) {
+            console.log(url)
+        }
+    </script>
+</body>
+
+</html>
