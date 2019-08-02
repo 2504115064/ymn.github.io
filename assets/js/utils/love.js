@@ -53,6 +53,7 @@ let blocks = document.getElementsByClassName("block"),
     block = blocks[0],
     love = document.getElementsByClassName("love")[0],
     timer = null,
+    timer2 = null,
     index = 0,  //记录拼接爱心的动画步骤
     clone_block;    //用于克隆方块
 
@@ -94,11 +95,9 @@ function Next() {
         block.style.display = "block";   //隐藏多出的block方块
     }
 }
-
 function Rise() {
     //4.爱心升高，多出的那个小方块开始掉落
     console.log("开始升空");
-    let timer2 = null,
         distance = 0;
     /* 升高时，移动的距离*/
     const target = 90, /* 目标距离*/
@@ -106,8 +105,6 @@ function Rise() {
     /*移动速度*/
 
     let love_top = parseFloat(window.getComputedStyle(love, null).top.slice(0, -2));  //爱心盒子距离屏幕顶部的距离
-
-
     timer2 = setInterval(() => {
         distance += speed;
         // console.log(distance);
@@ -115,7 +112,6 @@ function Rise() {
             clearInterval(timer2);
 
             console.log("升空完毕");
-
         }
 
         love.style.top = (love_top - distance) + "px";
@@ -130,6 +126,6 @@ function pageOneAnimated() {
         timer = setInterval(() => {
             Next();
         }, 300);
-    }, 11700);   //gif图播放完毕所需时间为11.73s
+    }, 11000);   //gif图播放完毕所需时间为11.73s
 }
 
