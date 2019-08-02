@@ -69,7 +69,11 @@
 		</div>
 		<div class="page section2">
 			<div class="contain">
-				<div id="divTyping" class="One_s_innermost_thoughts_and_feelings"></div>
+				<div class="One_s_innermost_thoughts_and_feelings">
+					<p class="YangMengni" id='YangMengni'></p>
+					<div class="One_s_innermost_thoughts_and_feelings_msg" id="divTyping"></div>
+					<p class="LuXuan" id="LuXuan"></p>
+				</div>
 			</div>
 		</div>
 		<div class="page section3">
@@ -166,22 +170,50 @@
 				if(index == 1){
 					clearInterval(timer);
 					clearInterval(timer2);
-					typing();
+					startOne();
 				}
 			}
 		});
 	</script>
 	<script type="text/javascript">
-		var One_s_innermost_thoughts_and_feelings = '青梅竹马不是你，情窦初开不是你<br />，只愿细水长流是你，柴米油盐是你，白首也是你。就让我笨拙的喜欢，从须臾到不朽，从一叶到知秋，然后骑一匹白马，到人海里安家。于千万人之中，遇见你所遇见的人；于千万年之中，时间的无涯荒野里，没有早一步，也没有晚一步，刚巧赶上了。我说不出来为什么喜欢你，但我知道，你就是我不爱别人的理由。';
-		var i = 0;
-		function typing() {
-			var divTyping = document.getElementById('divTyping');
-			if (i <= One_s_innermost_thoughts_and_feelings.length) {
-				divTyping.innerHTML = One_s_innermost_thoughts_and_feelings.slice(0, i++) + '_';
-				setTimeout('typing()', 200);//递归调用
+		let YangMengni_msg = '杨梦妮 :'
+		let One_s_innermost_thoughts_and_feelings_msg = '青梅竹马不是你，情窦初开不是你，只愿细水长流是你，柴米油盐是你，白首也是你。就让我笨拙的喜欢，从须臾到不朽，从一叶到知秋，然后骑一匹白马，到人海里安家。于千万人之中，遇见你所遇见的人；于千万年之中，时间的无涯荒野里，没有早一步，也没有晚一步，刚巧赶上了。我说不出来为什么喜欢你，但我知道，你就是我不爱别人的理由。';
+		let LuXuan_msg = '卢旋'
+		let y = 0;
+		let i = 0;
+		let l = 0;
+
+		function startOne() {
+			let YangMengni = document.getElementById('YangMengni');
+			let divTyping = document.getElementById('divTyping');
+			let LuXuan = document.getElementById('LuXuan');
+			if (y <= YangMengni_msg.length) {
+				YangMengni.innerHTML = YangMengni_msg.slice(0, y++) + '_';
+				setTimeout('startOne()', 200);//递归调用
 			}
 			else {
-				divTyping.innerHTML = One_s_innermost_thoughts_and_feelings;//结束打字,移除 _ 光标
+				YangMengni.innerHTML = YangMengni_msg;//结束打字,移除 _ 光标
+				startTwo()
+			}
+			
+		}
+		function startTwo(){
+			if (i <= One_s_innermost_thoughts_and_feelings_msg.length) {
+				divTyping.innerHTML = One_s_innermost_thoughts_and_feelings_msg.slice(0, i++) + '_';
+				setTimeout('startTwo()', 200);//递归调用
+			}
+			else {
+				divTyping.innerHTML = One_s_innermost_thoughts_and_feelings_msg;//结束打字,移除 _ 光标
+				startThree()
+			}
+		}
+		function startThree(){
+			if (l <= LuXuan_msg.length) {
+				LuXuan.innerHTML = LuXuan_msg.slice(0, l++) + '_';
+				setTimeout('startTwo()', 200);//递归调用
+			}
+			else {
+				LuXuan.innerHTML = LuXuan_msg;//结束打字,移除 _ 光标
 			}
 		}
 	</script>
