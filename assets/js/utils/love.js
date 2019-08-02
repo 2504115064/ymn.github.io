@@ -65,7 +65,6 @@ const block_left = parseFloat(window.getComputedStyle(block, null).left.slice(0,
     block_top = parseFloat(window.getComputedStyle(block, null).top.slice(0, -2));  //【爱心中心】 顶部距离父元素的距离
 
 function Next() {
-    console.log(index)
     if (++index >= 24) {
         clearInterval(timer);
 
@@ -127,10 +126,10 @@ function Rise() {
 function pageOneAnimated() {
     index = 0;
     document.getElementById("body_left").innerHTML=`<img src="./assets/img/biubiubiu.gif?timestamp=${new Date().getTime()}" alt="" ondragstart='return false;'>`
-    // setTimeout(() => {
+    setTimeout(() => {
         timer = setInterval(() => {
             Next();
         }, 300);
-    // }, 11700);   //gif图播放完毕所需时间为11.73s
+    }, 11700);   //gif图播放完毕所需时间为11.73s
 }
 

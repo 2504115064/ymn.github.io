@@ -54,7 +54,7 @@
 		<div class="page section1 current">
 			<div class="container" onselectstart="return false;" unselectable="on" style="-moz-user-select:none;">
 				<div class="body_left" id="body_left">
-					<img src="./assets/img/biubiubiu.gif" id="biubiubiu" alt="" ondragstart='return false;'>
+					<img src="./assets/img/biubiubiu.gif" id="biubiubiu" alt="">
 				</div>
 				<div class="body_center love" id="parent">
 					<div class="block">
@@ -140,10 +140,10 @@
 			mode: 'touch,wheel',               // mode of fullpage
 			easing: [0, .93, .39, .98],
 			callback: function (index, thisPage) {     // callback when pageChange
-				console.log(index)
 				if (index == 0) {
-					parent
+					document.getElementById("parent").innerHTML = '';
 					document.getElementById("parent").style.top = '55%';
+					document.getElementById("body_left").innerHTML = `<img src="./assets/img/biubiubiu.gif" id="biubiubiu" alt="">`;
 					$('#biubiubiu').load(function () {
 						// 加载完成    
 						pageOneAnimated()
@@ -182,7 +182,6 @@
 					state = 1;
 				}
 			}, false);
-
 			document.addEventListener("WeixinJSBridgeReady", function () {
 				audio.play();
 			}, false);
@@ -219,16 +218,19 @@
          * 跨域获取音乐详情
         */
 		function getAudioInfoOne(res) {
-			let hash = res.data.lists[0].FileHash,
-				album_id = res.data.lists[0].AlbumID
+			console.log(res)
+			let FileHash = res.data.lists[0].FileHash,
+			AlbumID = res.data.lists[0].AlbumID
 			var script = document.createElement('script');
-			script.src = `http://www.kugou.com/yy/index.php?callback=getAudioUrlOne&r=play/getdata&hash=${hash}&=${album_id}`;
+			script.src = `https://wwwapi.kugou.com/yy/index.php?r=play/getdata&callback=getAudioUrlOne&hash=${FileHash}&album_id=8439149&dfid=${AlbumID}&mid=11574738b9fc4d4a06087e49cef708d7&platid=4&_=1564755785142`
 			document.body.appendChild(script);
+
 		}
         /**
          * 获取音乐文件路径
         */
 		function getAudioUrlOne(data) {
+			console.log(data)
 			if (data) {
 				play_url(data.data.play_url)
 			}
