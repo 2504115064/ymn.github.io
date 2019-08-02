@@ -14,7 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="./assets/css/main.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/index.css">
 	<script src="./assets/js/viewport.js"></script>
-	<!-- <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script> -->
+	<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="./assets/js/fullPage.min.js"></script>
 	<style>
 		@font-face {
@@ -54,7 +54,7 @@
 		<div class="page section1 current">
 			<div class="container" onselectstart="return false;" unselectable="on" style="-moz-user-select:none;">
 				<div class="body_left" id="body_left">
-					<img src="./assets/img/biubiubiu.gif" alt="" ondragstart='return false;'>
+					<img src="./assets/img/biubiubiu.gif" id="biubiubiu" alt="" ondragstart='return false;'>
 				</div>
 				<div class="body_center love" id="parent">
 					<div class="block">
@@ -120,9 +120,8 @@
 	<audio id="audio" controls="controls" onplay="this.currentTime=15" autoplay="autoplay" src=""></audio>
 	<script src="./assets/js/utils/love.js" type="text/javascript"></script>
 	<script type="text/javascript">
-
-
 		pageOneAnimated()
+
 		var runPage,
 			runPage2,
 			interval,
@@ -143,7 +142,15 @@
 			callback: function (index, thisPage) {     // callback when pageChange
 				console.log(index)
 				if (index == 0) {
-					pageOneAnimated()
+					parent
+					document.getElementById("parent").style.top = '55%';
+					$('#biubiubiu').load(function () {
+						// 加载完成    
+						pageOneAnimated()
+
+					})
+
+
 				} else {
 					document.getElementById("parent").innerHTML = '';
 					document.getElementById("body_left").innerHTML = '';
@@ -169,10 +176,10 @@
 			getAudioListOne('静悄悄')
 			var audio = document.getElementById('audio');
 			var state = 0;
-			document.addEventListener('touchstart', function(){
-				if(state==0){
+			document.addEventListener('touchstart', function () {
+				if (state == 0) {
 					audio.play();
-					state=1;
+					state = 1;
 				}
 			}, false);
 
@@ -191,9 +198,9 @@
 			}
 			audio.loop = false;
 			audio.addEventListener('ended', function () {
-				if(audioArr == 0){
+				if (audioArr == 0) {
 					audioArr = 1
-				}else{
+				} else {
 					audioArr = 0
 				}
 				audio.setAttribute('src', audioUrlArr[audioArr])

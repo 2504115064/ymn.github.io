@@ -21,7 +21,7 @@ const blk_pitn = { //各小方块相对【自身中心】的位置 -- 【自身�
     block20: [[1, -1], [0, 0], [-1, 0], [1, 0]],
     block21: [[0, 1], [0, 0], [-1, 0], [-1, -1]], /* 1 */
     block22: [[1, 1], [0, 0], [-1, 0], [1, 0]], /* 14 */
-    block23: [[0, 2], [0, 0], [0, -1], [0, 1]]      /* | */
+    block23: [[0, 2], [0, 0], [0, 0], [0, 1]]      /* | */
 },
     offset_pitn = { //各方块block相对【爱心中心】的位置
         block1: [5, 3],
@@ -127,10 +127,10 @@ function Rise() {
 function pageOneAnimated() {
     index = 0;
     document.getElementById("body_left").innerHTML=`<img src="./assets/img/biubiubiu.gif?timestamp=${new Date().getTime()}" alt="" ondragstart='return false;'>`
-    setTimeout(() => {
+    // setTimeout(() => {
         timer = setInterval(() => {
             Next();
         }, 300);
-    }, 11700);   //gif图播放完毕所需时间为11.73s
+    // }, 11700);   //gif图播放完毕所需时间为11.73s
 }
 
