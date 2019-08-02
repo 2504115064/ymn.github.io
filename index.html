@@ -9,6 +9,7 @@
 	<meta name="baidu-site-verification" content="qKSX5MEr35">
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<meta name="renderer" content="webkit">
 	<link rel="shortcut icon" href="./assets/img/Love.png">
 	<link rel="stylesheet" type="text/css" href="./assets/css/main.css">
@@ -224,7 +225,6 @@
 			var script = document.createElement('script');
 			script.src = `https://wwwapi.kugou.com/yy/index.php?r=play/getdata&callback=getAudioUrlOne&hash=${FileHash}&album_id=8439149&dfid=${AlbumID}&mid=11574738b9fc4d4a06087e49cef708d7&platid=4&_=1564755785142`
 			document.body.appendChild(script);
-
 		}
         /**
          * 获取音乐文件路径
