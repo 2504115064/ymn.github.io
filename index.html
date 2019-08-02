@@ -81,13 +81,13 @@
 				<div class="love_trailer">
 					<div class="love_surface exClockwise animated">
 						<img class="love_component_img"
-							src="http://m.qpic.cn/psb?/V13fmOcx2tUxJm/V2OE1A8DQtsS*qotZO*j2ZKNeWFe6KYZkpJnP3WC9ys!/b/dMMAAAAAAAAA&bo=8wM8BAAAAAADJ8o!&rf=viewer_4">
+							src="./assets/img/55e736d12f2eb9382bd385e2dc628535e5dd6f60.png">
 					</div>
 				</div>
 				<div class="love_trailer_exBounce">
 					<div class="love_surface_image exBounce animated">
 						<img class="love_component_image"
-							src="http://m.qpic.cn/psb?/V13fmOcx2tUxJm/ad71KLmL5M0F*v5.XtH**2RXjH0hkz*YU21aLBI6seo!/b/dDcBAAAAAAAA&bo=wwPYAgAAAAADBzg!&rf=viewer_4">
+							src="http://m.qpic.cn/psb?/V13fmOcx2tUxJm/ad71KLmL5M0F*v5.XtH**2RXjH0hkz*YU21aLBI6seo!/b/dDcBAAAAAAAA&bo=wwPYAgAAAAADJxg!&rf=viewer_4">
 					</div>
 				</div>
 				<div class="love_trailer_exBounce">
@@ -144,6 +144,7 @@
 			easing: [0, .93, .39, .98],
 			callback: function (index, thisPage) {     // callback when pageChange
 				if (index == 0) {
+					emptyText()
 					document.getElementById("body_left").innerHTML = `<img src="./assets/img/biubiubiu.gif" id="biubiubiu" alt="">`;
 					clearInterval(timer);
 					clearInterval(timer2);
@@ -172,6 +173,9 @@
 					clearInterval(timer2);
 					startOne();
 				}
+				if(index == 2) {
+					emptyText()
+				}
 			}
 		});
 	</script>
@@ -181,15 +185,27 @@
 		let LuXuan_msg = '卢旋'
 		let y = 0;
 		let i = 0;
-		let l = 0;
+		let l = 0,
+		startOneTimeout,
+		startTwoTimeout,
+		startThreeTimeout;
 
+		function emptyText(){
+
+			clearTimeout(startOneTimeout)
+			clearTimeout(startTwoTimeout)
+			clearTimeout(startThreeTimeout)
+			document.getElementById('YangMengni').text = "";
+			document.getElementById('divTyping').text = "";
+			document.getElementById('LuXuan').text = "";
+		}
 		function startOne() {
 			let YangMengni = document.getElementById('YangMengni');
 			let divTyping = document.getElementById('divTyping');
 			let LuXuan = document.getElementById('LuXuan');
 			if (y <= YangMengni_msg.length) {
 				YangMengni.innerHTML = YangMengni_msg.slice(0, y++) + '_';
-				setTimeout('startOne()', 200);//递归调用
+				startOneTimeout = setTimeout('startOne()', 200);//递归调用
 			}
 			else {
 				YangMengni.innerHTML = YangMengni_msg;//结束打字,移除 _ 光标
@@ -200,7 +216,7 @@
 		function startTwo(){
 			if (i <= One_s_innermost_thoughts_and_feelings_msg.length) {
 				divTyping.innerHTML = One_s_innermost_thoughts_and_feelings_msg.slice(0, i++) + '_';
-				setTimeout('startTwo()', 200);//递归调用
+				startTwoTimeout = setTimeout('startTwo()', 200);//递归调用
 			}
 			else {
 				divTyping.innerHTML = One_s_innermost_thoughts_and_feelings_msg;//结束打字,移除 _ 光标
@@ -210,7 +226,7 @@
 		function startThree(){
 			if (l <= LuXuan_msg.length) {
 				LuXuan.innerHTML = LuXuan_msg.slice(0, l++) + '_';
-				setTimeout('startTwo()', 200);//递归调用
+				startThreeTimeout = setTimeout('startTwo()', 200);//递归调用
 			}
 			else {
 				LuXuan.innerHTML = LuXuan_msg;//结束打字,移除 _ 光标
