@@ -1,7 +1,7 @@
 @charset "utf-8";
 @font-face {
     font-family: HappyZcool;
-    src: url(../font/happyzcool.ttf)
+    src: url(../font/happyzcool.ttf);
 }
 html {
     -ms-touch-action: none;
@@ -625,18 +625,18 @@ body {
 }
 .YangMengni{
     font-size: 24px;
-    font-family: HappyZcool;
+    font-family: HappyZcool,cursive;
 }
 .One_s_innermost_thoughts_and_feelings_msg{
     text-indent: 40px;
     line-height: 40px;
     font-size: 18px;
-    font-family: HappyZcool;
+    font-family: HappyZcool,cursive;
 }
 .LuXuan{
     text-align: right;
     font-size: 20px;
-    font-family: HappyZcool;
+    font-family: HappyZcool,cursive;
 }
 /*
 *第三屏样式
