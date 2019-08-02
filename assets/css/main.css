@@ -1,4 +1,8 @@
 @charset "utf-8";
+@font-face {
+    font-family: HappyZcool;
+    src: url('./assets/font/happyzcool.ttf')
+}
 html {
     -ms-touch-action: none;
     touch-action: pan-y!important;
@@ -1210,7 +1214,6 @@ body {
     width: 276px;
     transform: rotate(8deg);
 }
-
 .love_component_label_lg {
     display: table-cell;
     vertical-align: top;
