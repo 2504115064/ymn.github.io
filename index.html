@@ -144,7 +144,6 @@
 			easing: [0, .93, .39, .98],
 			callback: function (index, thisPage) {     // callback when pageChange
 				if (index == 0) {
-					emptyText()
 					document.getElementById("body_left").innerHTML = `<img src="./assets/img/biubiubiu.gif" id="biubiubiu" alt="">`;
 					clearInterval(timer);
 					clearInterval(timer2);
@@ -174,7 +173,6 @@
 					startOne();
 				}
 				if(index == 2) {
-					emptyText()
 				}
 			}
 		});
@@ -190,15 +188,16 @@
 		startTwoTimeout,
 		startThreeTimeout;
 
-		function emptyText(){
-
-			clearTimeout(startOneTimeout)
-			clearTimeout(startTwoTimeout)
-			clearTimeout(startThreeTimeout)
-			document.getElementById('YangMengni').text = "";
-			document.getElementById('divTyping').text = "";
-			document.getElementById('LuXuan').text = "";
-		}
+		// function emptyText(){
+		// 	console.log('startOne')
+		// 	clearTimeout(startOneTimeout)
+		// 	clearTimeout(startTwoTimeout)
+		// 	clearTimeout(startThreeTimeout)
+		// 	document.getElementById('YangMengni').innerHTML = "";
+		// 	document.getElementById('divTyping').innerHTML = "";
+		// 	document.getElementById('LuXuan').innerHTML = "";
+		// 	startOne()
+		// }
 		function startOne() {
 			let YangMengni = document.getElementById('YangMengni');
 			let divTyping = document.getElementById('divTyping');
