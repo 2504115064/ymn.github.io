@@ -60,7 +60,7 @@ let blocks = document.getElementsByClassName("block"),
 //1.移动方块的【自身中心】到【爱心中心】
 block.style.top = "50%";
 block.style.left = "50%";
-block.style.margin = "-20px 0 0 -20px";
+block.style.margin = "-0.8rem 0 0 -0.8rem ";
 
 const block_left = parseFloat(window.getComputedStyle(block, null).left.slice(0, -2)), //【爱心中心】 左边距离父元素的距离
     block_top = parseFloat(window.getComputedStyle(block, null).top.slice(0, -2));  //【爱心中心】 顶部距离父元素的距离
@@ -114,7 +114,7 @@ function Rise() {
             console.log("升空完毕");
         }
 
-        love.style.top =  "279px";
+        love.style.top =  "11.16rem";
 
     }, 22);
 
