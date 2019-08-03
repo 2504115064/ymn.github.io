@@ -15,7 +15,6 @@
 	<link rel="stylesheet" type="text/css" href="./assets/css/main.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/index.css">
 	<script src="./assets/js/viewport.js"></script>
-	<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="./assets/js/fullPage.min.js"></script>
 	<style>
 		@font-face {
@@ -41,17 +40,38 @@
 <body scroll="no"> 
 <![endif]-->
 <!--[if gt IE 7]><!-->
-<!-- 第三屏样式 -->
-<style>
 
-
-
-</style>
 
 <body οnlοad="newtext()">
+	<div class="LoadPage" id="LoadPage">
+		<div class='is-animate style3'>
+			<div>听</div>
+			<div>闻</div>
+			<div class="object">
+				<div>姑</div>
+				<div>娘</div>
+			</div>
+			<div>治</div>
+			<div>家</div>
+			<div>有</div>
+			<div>方</div>
+			<div>，</div>
+			<div class="object">
+				<div>鄙</div>
+				<div>人</div>
+			</div>
+			<div>余</div>
+			<div>生</div>
+			<div>愿</div>
+			<div>闻</div>
+			<div>其</div>
+			<div>详</div>
+			<div>。</div>
+		</div>
+	</div>
 	<!--<![endif]-->
 	<!-- <div class="love_audio_play haha1" onclick="lovePlay(this)"></div> -->
-	<div id="article">
+	<div id="article" class="article">
 		<div class="page section1 current">
 			<div class="container" onselectstart="return false;" unselectable="on" style="-moz-user-select:none;">
 				<div class="body_left" id="body_left">
@@ -80,14 +100,12 @@
 			<div class="love_page">
 				<div class="love_trailer">
 					<div class="love_surface exClockwise animated">
-						<img class="love_component_img"
-							src="./assets/img/55e736d12f2eb9382bd385e2dc628535e5dd6f60.png">
+						<img class="love_component_img" src="./assets/img/55e736d12f2eb9382bd385e2dc628535e5dd6f60.png">
 					</div>
 				</div>
 				<div class="love_trailer_exBounce">
 					<div class="love_surface_image exBounce animated">
-						<img class="love_component_image"
-							src="./assets/img/d6fad5.png">
+						<img class="love_component_image" src="./assets/img/d6fad5.png">
 					</div>
 				</div>
 				<div class="love_trailer_exBounce">
@@ -123,7 +141,15 @@
 	</div>
 	<script src="./assets/js/utils/love.js" type="text/javascript"></script>
 	<script type="text/javascript">
-		pageOneAnimated()
+		window.onload = function () {
+			let LoadPage = document.getElementById('LoadPage');
+			let article = document.getElementById('article');
+			setTimeout(function () {
+				LoadPage.classList.add('LoadPageHide');
+				article.classList.add('articleVisible');
+				pageOneAnimated()
+			}, 2000)
+		}
 		let runPage,
 			runPage2,
 			interval,
@@ -149,30 +175,28 @@
 					clearInterval(timer2);
 					setTimeout(function () {
 						document.getElementById("parent").innerHTML = '';
+						document.getElementById("parent").style.top = '55%';
 						document.getElementById("parent").style.display = 'block';
 					}, 300)
-					$('#biubiubiu').load(function () {
+					document.getElementById("biubiubiu").onload = function () {
 						pageOneAnimated()
-					})
+					}
+					resetpageTwoAnimated()
 				} else {
 					clearInterval(timer);
 					clearInterval(timer2);
 					document.getElementById("parent").innerHTML = '';
 					document.getElementById("parent").style.display = 'none';
 					document.getElementById("body_left").innerHTML = '';
-					document.getElementById("parent").innerHTML = `<div class="block">
-																			<div class="div1"></div>
-																			<div class="div2"></div>
-																			<div class="div3"></div>
-																			<div class="div4"></div>
-																		</div>`
+					document.getElementById("parent").innerHTML = `<div class="block"><div class="div1"></div><div class="div2"></div><div class="div3"></div><div class="div4"></div></div>`
 				}
-				if(index == 1){
+				if (index == 1) {
 					clearInterval(timer);
 					clearInterval(timer2);
 					startOne();
 				}
-				if(index == 2) {
+				if (index == 2) {
+					resetpageTwoAnimated()
 				}
 			}
 		});
@@ -184,20 +208,20 @@
 		let y = 0;
 		let i = 0;
 		let l = 0,
-		startOneTimeout,
-		startTwoTimeout,
-		startThreeTimeout;
-
-		// function emptyText(){
-		// 	console.log('startOne')
-		// 	clearTimeout(startOneTimeout)
-		// 	clearTimeout(startTwoTimeout)
-		// 	clearTimeout(startThreeTimeout)
-		// 	document.getElementById('YangMengni').innerHTML = "";
-		// 	document.getElementById('divTyping').innerHTML = "";
-		// 	document.getElementById('LuXuan').innerHTML = "";
-		// 	startOne()
-		// }
+			startOneTimeout,
+			startTwoTimeout,
+			startThreeTimeout;
+		function resetpageTwoAnimated() {
+			y = 0;
+			i = 0;
+			l = 0;
+			document.getElementById('YangMengni').innerHTML = " ";
+			document.getElementById('divTyping').innerHTML = " ";
+			document.getElementById('LuXuan').innerHTML = " ";
+			clearTimeout(startOneTimeout);
+			clearTimeout(startTwoTimeout);
+			clearTimeout(startThreeTimeout);
+		}
 		function startOne() {
 			let YangMengni = document.getElementById('YangMengni');
 			let divTyping = document.getElementById('divTyping');
@@ -210,9 +234,9 @@
 				YangMengni.innerHTML = YangMengni_msg;//结束打字,移除 _ 光标
 				startTwo()
 			}
-			
+
 		}
-		function startTwo(){
+		function startTwo() {
 			if (i <= One_s_innermost_thoughts_and_feelings_msg.length) {
 				divTyping.innerHTML = One_s_innermost_thoughts_and_feelings_msg.slice(0, i++) + '_';
 				startTwoTimeout = setTimeout('startTwo()', 200);//递归调用
@@ -222,7 +246,7 @@
 				startThree()
 			}
 		}
-		function startThree(){
+		function startThree() {
 			if (l <= LuXuan_msg.length) {
 				LuXuan.innerHTML = LuXuan_msg.slice(0, l++) + '_';
 				startThreeTimeout = setTimeout('startTwo()', 200);//递归调用

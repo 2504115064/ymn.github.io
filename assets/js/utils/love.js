@@ -114,7 +114,7 @@ function Rise() {
             console.log("升空完毕");
         }
 
-        love.style.top = (love_top - distance) + "px";
+        love.style.top =  "279px";
 
     }, 22);
 
