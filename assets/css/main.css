@@ -47,7 +47,7 @@ body {
     width: 100%;
     height: 100%;
     display: block;
-    background: #fff;
+    background: #52c1f3;
     opacity: 1;
     transform:scale(1,1);
 }
@@ -357,8 +357,9 @@ body {
     box-shadow: 0.04rem 0.04rem 0.16rem 0 #f7a0a0;
 }
 .section2 {
-    background: #52c1f3;
-    box-shadow: 0.04rem 0.04rem 0.16rem 0 #20b6fa;
+ 
+    background: #000000;
+    box-shadow: 0.04rem 0.04rem 0.16rem 0 #00080b;
 }
 .section3 {
     background: #f3efe9;
@@ -754,8 +755,11 @@ body {
 }
 
 .article {
+    width: 100vw;
+    height: 100vh;
     position: relative;
     visibility: hidden;
+    overflow: hidden;
     z-index: -999;
     transition: all 3s ease;
 }
@@ -933,9 +937,21 @@ body {
 }
 .One_s_innermost_thoughts_and_feelings_msg{
     text-indent: 1.6rem;
+    line-height: 1.4rem;
+    font-size: 0.72rem;
+    font-family: HappyZcool,cursive;
+}
+.Wish{
+    text-indent: 1.6rem;
     line-height: 1.6rem;
     font-size: 0.72rem;
     font-family: HappyZcool,cursive;
+}
+.blessing{
+    line-height: 1.4rem;
+    font-size: 0.6rem;
+    font-family: HappyZcool,cursive;
+    text-decoration: underline;
 }
 .LuXuan{
     text-align: right;
@@ -1289,6 +1305,93 @@ body {
 }
 .love_component_label_lg p span {
     font-family: HappyZcool;
-    font-size: 1.28rem;
+    font-size: 1.15rem;
     color: rgb(106, 53, 0);
+}
+
+
+
+@-webkit-keyframes lightan{
+
+    from{
+        top: 5%;
+        opacity: 1;
+        
+        }
+    to{
+        top: 0%;
+        opacity: 0;
+        }
+}
+@keyframes lightan{
+
+    from{
+        top: 5%;
+        opacity: 1;
+        
+        }
+    to{
+        top: 0%;
+        opacity: 0;
+        }
+    }
+.tophtan{
+    -webkit-animation: lightan 1s infinite;
+    -webkit-animation-fill-mode: both;
+    animation: lightan 1s infinite;
+    animation-fill-mode: both;
+    z-index: 2000;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: none;
+}
+.tophtan img{
+    display: initial;
+    width: 35px;
+    height: 25px;
+    -webkit-transform:rotate(180deg);
+    transform:rotate(180deg);
+}
+@-webkit-keyframes rightan{
+
+    from{
+        bottom: 5%;
+        opacity: 1;
+        
+        }
+    to{
+        bottom: 0%;
+        opacity: 0;
+        }
+}
+@keyframes rightan{
+
+    from{
+        bottom: 5%;
+        opacity: 1;
+        
+        }
+    to{
+        bottom: 0%;
+        opacity: 0;
+        }
+    }
+.bottomhtan{
+    display: none;
+    -webkit-animation: rightan 1s infinite;
+    -webkit-animation-fill-mode: both;
+    animation: rightan 1s infinite;
+    animation-fill-mode: both;
+    z-index: 2000;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.bottomhtan img{
+    display: initial;
+    width: 35px;
+    height: 25px;
 }
