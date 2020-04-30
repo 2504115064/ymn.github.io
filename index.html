@@ -78,31 +78,6 @@
             text-align: right;
         }
     </style>
-    <script>
-        function getFormData() {
-            let timeDate = new Date();
-            let form = document.getElementById("my-form");
-            let time = document.getElementById("time");
-            time.value = timeDate.toLocaleString();
-            let data = new FormData(form);
-            ajax(form.method, form.action, data);
-        }
-        function ajax(method, url, data) {
-            let xhr = new XMLHttpRequest();
-            xhr.open(method, url);
-            xhr.setRequestHeader("Accept", "application/json");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState !== XMLHttpRequest.DONE) return;
-                if (xhr.status === 200) {
-
-                } else {
-
-                }
-            };
-            xhr.send(data);
-        }
-        getFormData()
-    </script>
 </head>
 <!--[if lte IE 7]>      
 <body scroll="no"> 
@@ -123,6 +98,31 @@
     </form>
 </body>
 <script>
+    function getFormData() {
+        let timeDate = new Date();
+        let form = document.getElementById("my-form");
+        let time = document.getElementById("time");
+        time.value = timeDate.toLocaleString();
+        let data = new FormData(form);
+        ajax(form.method, form.action, data);
+    }
+    function ajax(method, url, data) {
+        let xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState !== XMLHttpRequest.DONE) return;
+            if (xhr.status === 200) {
+
+            } else {
+
+            }
+        };
+        xhr.send(data);
+    }
+    getFormData()
+
+
     let YangMengni_msg = '杨梦妮 :'
     let One_s_innermost_thoughts_and_feelings_msg = '当你访问这个网址的时候。你应该是想起我了吧。别任性了，我知道你自尊心狠要强，但这就是事实。在这里先道个歉。很抱歉怪自己没有抑制住感情，表现得很不成熟结果把你吓跑了。自你明确拒绝我以来，这些日子里我的心也终于冷静下来了。虽然很不甘心，很难过，也很沮丧，到头来要怪只能怪自己，明明你给了我许多机会我却没有好好珍惜，一而再再而三的在你面前表现的无比幼稚。如果不是真喜欢，我想自己也不会像个幼稚鬼去为那个特别的人做傻事吧。我也明白像我们这个年纪的人了，已经不需要讨好任何人了。爱情对我们来说是一种奢求，不是为了逃避寂寞。我讨厌那个在你面前自卑的自己，但我更喜欢自己眼中那个美好的你！这没什么不好，喜欢的第一反应就是自卑吧。遇到一个喜欢的人其实不难，多少爱情都开始于喜欢，结束于了解，后来明白，所谓合适的人，没有定论，大概是三观相似，兴趣可以不同，但决不干涉对方，有话聊，相处和独处一样自然。这一路，你是你，我是我，不是没你不行，但有你更好。喜欢一个人，不停的和他争。爱一个人，不停的为他付出。喜欢一个人，希望他可以随时找到自己。爱一个人，希望可以随时找到他。喜欢一个人，总是为他而笑。爱一个人，总是为他而哭。喜欢，是执着!爱，是值得!我们重新开始好吗?';
     let LuXuan_msg = '卢旋'
