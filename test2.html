@@ -1,16 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 
 <head>
     <meta charset="utf-8">
+    <title>静态页面发送邮件例子</title>
+
+
+    <script language="JavaScript" type="text/JavaScript">
+            function submitForm() {
+                var form = document.getElementById('form1');
+                var title = document.getElementById('title').value;
+                var content = document.getElementById('content').value;
+                form.action = 'mailto:418055151@qq.com?subject=' + title + '&body='
+                        + content;
+                form.submit();
+            }
+            </script>
+
 </head>
+
 <body>
-    <form action="https://formspree.io/418055151@qq.com" method="post">
-        <input type="text" placeholder="您的姓名" name="name">
-        <textarea name="message" id="doc-vld-ta-2-1"  placeholder="请输入您的留言"></textarea>
-        <div class="banner_btn pa">
-            <button style="line-height: 41px;" type="submit">发送信息</button>
-        </div>
-</form>
+
+    <form id="my-form" action="https://formspree.io/418055151@qq.com" method="POST">
+        <label>Email:</label>
+        <input type="email" name="email" />
+        <label>Message:</label>
+        <input type="text" name="message" />
+        <button id="my-form-button">Submit</button>
+        <p id="my-form-status"></p>
+    </form>
+    <script>
+        window.addEventListener("DOMContentLoaded", function () {
+
+            // get the form elements defined in your form HTML above
+
+            var form = document.getElementById("my-form");
+            var button = document.getElementById("my-form-button");
+            var status = document.getElementById("my-form-status");
+
+            // Success and Error functions for after the form is submitted
+
+            function success() {
+                form.reset();
+                button.style = "display: none ";
+                status.innerHTML = "Thanks!";
+            }
+
+            function error() {
+                status.innerHTML = "Oops! There was a problem.";
+            }
+
+            // handle the form submission event
+
+            form.addEventListener("submit", function (ev) {
+                ev.preventDefault();
+                var data = new FormData(form);
+                ajax(form.method, form.action, data, success, error);
+            });
+        });
+
+        // helper function for sending an AJAX request
+
+        function ajax(method, url, data, success, error) {
+            var xhr = new XMLHttpRequest();
+            xhr.open(method, url);
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState !== XMLHttpRequest.DONE) return;
+                if (xhr.status === 200) {
+                    success(xhr.response, xhr.responseType);
+                } else {
+                    error(xhr.status, xhr.response, xhr.responseType);
+                }
+            };
+            xhr.send(data);
+        }
+    </script>
 </body>
+
 </html>
