@@ -6,75 +6,34 @@
     <title>静态页面发送邮件例子</title>
 
 
-    <script language="JavaScript" type="text/JavaScript">
-            function submitForm() {
-                var form = document.getElementById('form1');
-                var title = document.getElementById('title').value;
-                var content = document.getElementById('content').value;
-                form.action = 'mailto:418055151@qq.com?subject=' + title + '&body='
-                        + content;
-                form.submit();
-            }
-            </script>
-
 </head>
 
 <body>
 
-    <form id="my-form" action="https://formspree.io/418055151@qq.com" method="POST">
-        <label>Email:</label>
-        <input type="email" name="email" />
-        <label>Message:</label>
-        <input type="text" name="message" />
-        <button id="my-form-button">Submit</button>
-        <p id="my-form-status"></p>
+    <form id="content">
+        <input type="text" name="name" placeholder="输入你的姓名" />
+        <input type="email" name="_replyto" placeholder="输入你的邮箱" />
+        <input type="button" value="发送" id="btn" />
+        //更多name属性参考https://formspree.io
     </form>
+    <script src="assets/js/jquery.min.js"></script>
     <script>
-        window.addEventListener("DOMContentLoaded", function () {
-
-            // get the form elements defined in your form HTML above
-
-            var form = document.getElementById("my-form");
-            var button = document.getElementById("my-form-button");
-            var status = document.getElementById("my-form-status");
-
-            // Success and Error functions for after the form is submitted
-
-            function success() {
-                form.reset();
-                button.style = "display: none ";
-                status.innerHTML = "Thanks!";
-            }
-
-            function error() {
-                status.innerHTML = "Oops! There was a problem.";
-            }
-
-            // handle the form submission event
-
-            form.addEventListener("submit", function (ev) {
-                ev.preventDefault();
-                var data = new FormData(form);
-                ajax(form.method, form.action, data, success, error);
-            });
-        });
-
-        // helper function for sending an AJAX request
-
-        function ajax(method, url, data, success, error) {
-            var xhr = new XMLHttpRequest();
-            xhr.open(method, url);
-            xhr.setRequestHeader("Accept", "application/json");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState !== XMLHttpRequest.DONE) return;
-                if (xhr.status === 200) {
-                    success(xhr.response, xhr.responseType);
-                } else {
-                    error(xhr.status, xhr.response, xhr.responseType);
+        $("#btn").on("click", function () {
+            var obj = $("#content").serialize();  //获取id为content的form表单里面的内容,name值均为formspree提供不能更改
+            $.ajax({
+                type: "post",						//必须post请求
+                url: "https://formspree.io/418055151@qq.com", //abc@qq.com换成你要接收的邮箱地址
+                async: true,
+                data: obj,
+                dataType: "json",
+                success: res => {
+                    alert('邮件已发送!!!');   			//发送成功后的操作
+                },
+                error: res => {
+                    alert("未知错误,发送失败");
                 }
-            };
-            xhr.send(data);
-        }
+            });
+        })
     </script>
 </body>
 
