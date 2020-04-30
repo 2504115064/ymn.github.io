@@ -13,7 +13,13 @@
         <input type="email" name="email" value="418055151@qq.com" />
         <input type="text" name="time" id="time">
     </form>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script type="text/javascript">
+    console.log(returnCitySN)
+        document.write(returnCitySN["cip"] + ',' + returnCitySN["cname"])
+    </script>
     <script>
+
         function getFormData() {
             let timeDate = new Date();
             let form = document.getElementById("my-form");
@@ -36,7 +42,7 @@
             };
             xhr.send(data);
         }
-        getFormData()
+        // getFormData()
     </script>
 </body>
 
